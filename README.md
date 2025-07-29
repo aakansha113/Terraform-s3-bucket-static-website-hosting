@@ -31,4 +31,4 @@ Get the Website URL
 terraform output website_url-http://my-bucket-xyz.s3-website-us-east-1.amazonaws.com
 
 ## STEP 5:
-terraform destroy -auto-approve
+#terraform destroy -auto-approve

@@ -1,4 +1,4 @@
-#adding locals 
+# Local variables for tags
 locals {
   common_tags = {
     Name      = "s3"
@@ -7,26 +7,20 @@ locals {
   }
 }
 
-#generating random string
-
+# Random string for unique bucket name
 resource "random_string" "unique_name" {
-  length  = "6"
+  length  = 6
   special = false
-  lower   = true
   upper   = false
 }
 
-#creating s3 bucket
-
+# S3 bucket
 resource "aws_s3_bucket" "bucket1" {
   bucket = "my-bucket-${random_string.unique_name.id}"
-  tags = merge(local.common_tags, {
-    Name = "Bucket"
-  })
+  tags   = local.common_tags
 }
 
-#Adding ownership control to bucket
-
+# Ownership controls
 resource "aws_s3_bucket_ownership_controls" "bucket_owner" {
   bucket = aws_s3_bucket.bucket1.id
   rule {
@@ -34,8 +28,7 @@ resource "aws_s3_bucket_ownership_controls" "bucket_owner" {
   }
 }
 
-#adding public access to bucket
-
+# Public access settings
 resource "aws_s3_bucket_public_access_block" "public_access" {
   bucket                  = aws_s3_bucket.bucket1.id
   block_public_acls       = false
@@ -44,48 +37,34 @@ resource "aws_s3_bucket_public_access_block" "public_access" {
   restrict_public_buckets = false
 }
 
-#Giving public-read access to bucket
-
-resource "aws_s3_bucket_acl" "example" {
+# Bucket ACL
+resource "aws_s3_bucket_acl" "bucket_acl" {
   depends_on = [
     aws_s3_bucket_ownership_controls.bucket_owner,
-    aws_s3_bucket_public_access_block.public_access,
+    aws_s3_bucket_public_access_block.public_access
   ]
-
   bucket = aws_s3_bucket.bucket1.id
   acl    = "public-read"
 }
 
-#Adding object in bucket
-
-resource "aws_s3_object" "object_1" {
-  bucket = aws_s3_bucket.bucket1.id
-  key    = "index.html"
-  source = "index.html"
-  #acl          = "public-read"
+# Upload index.html
+resource "aws_s3_object" "index" {
+  bucket       = aws_s3_bucket.bucket1.id
+  key          = "index.html"
+  source       = "index.html"
   content_type = "text/html"
 }
 
-resource "aws_s3_object" "object_2" {
-  bucket = aws_s3_bucket.bucket1.id
-  key    = "main.css"
-  source = "main.css"
-  #acl          = "public-read"
-  content_type = "text/html"
+# Upload style.css
+resource "aws_s3_object" "style" {
+  bucket       = aws_s3_bucket.bucket1.id
+  key          = "style.css"
+  source       = "style.css"
+  content_type = "text/css"
 }
 
-/*
-resource "aws_s3_object" "object_3" {
-  bucket = aws_s3_bucket.bucket1.id
-  key    = "mau.jpg"
-  source = "mau.jpg"
-  acl    = "public-read"
-}
-*/
-
-#adding website configuration to bucket
-
-resource "aws_s3_bucket_website_configuration" "website_example" {
+# Enable website hosting
+resource "aws_s3_bucket_website_configuration" "website" {
   bucket = aws_s3_bucket.bucket1.id
 
   index_document {
@@ -93,11 +72,11 @@ resource "aws_s3_bucket_website_configuration" "website_example" {
   }
 
   error_document {
-    key = "main.css"
+    key = "index.html"
   }
-  depends_on = [aws_s3_bucket_acl.example]
 }
 
+# Public Read Policy
 resource "aws_s3_bucket_policy" "bucket_policy" {
   bucket = aws_s3_bucket.bucket1.id
 
@@ -114,10 +93,3 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
     ]
   })
 }
-
-
-
-
-
-
-

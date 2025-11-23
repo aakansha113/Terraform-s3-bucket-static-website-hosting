@@ -19,7 +19,7 @@ It creates an S3 bucket, enables static website hosting, uploads `index.html` an
 ## 📥 Clone This Repository
 ### To clone this portfolio on your local system, run:
 ```
-https://github.com/aakansha113/Terraform-s3-bucket-static-website-hosting.git
+git clone https://github.com/aakansha113/Terraform-s3-bucket-static-website-hosting.git
 ```
 
 ### STEP 1:

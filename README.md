@@ -11,24 +11,42 @@ It creates an S3 bucket, enables static website hosting, uploads `index.html` an
 ├── output.tf # Outputs (Website URL)
 └── .gitignore # Ignore .terraform, state files
 
-## STEP 1:
+## 📥 Clone This Repository
+### To clone this portfolio on your local system, run:
+```
+https://github.com/aakansha113/Terraform-s3-bucket-static-website-hosting.git
+```
+
+### STEP 1:
 Initialize Terraform
+```
+terraform init
+```
 
-#terraform init
+### STEP 2:
+#### Validate and Plan:
+```
+terraform validate
+terraform plan
+```
 
-## STEP 2:
-Validate and Plan:
-#terraform validate
-#terraform plan
+### STEP 3:
+#### Apply the configuration
+```
+terraform apply -auto-approve
+```
 
-## STEP 3:
-Apply the configuration
-#terraform apply -auto-approve
+### STEP 4:
+#### Get the Website URL
 
-## STEP 4:
-Get the Website URL
+##### terraform output website_url-
+```
+http://my-bucket-xyz.s3-website-us-east-1.amazonaws.com
+```
 
-terraform output website_url-http://my-bucket-xyz.s3-website-us-east-1.amazonaws.com
-
-## STEP 5:
-#terraform destroy -auto-approve
+### STEP 5:
+```
+terraform destroy -auto-approve
+```
+### ⭐ Show Your Support
+#### If you like this portfolio, feel free to ⭐ star the repo!

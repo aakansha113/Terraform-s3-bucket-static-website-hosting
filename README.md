@@ -5,10 +5,15 @@ It creates an S3 bucket, enables static website hosting, uploads `index.html` an
 
 ##  Project Structure
 ├── index.html # Main HTML page
+|
 ├── style.css # CSS styling for the website
+|
 ├── main.tf # Terraform resources (S3 bucket, objects, policies)
+|
 ├── provider.tf # AWS provider configuration
+|
 ├── output.tf # Outputs (Website URL)
+|
 └── .gitignore # Ignore .terraform, state files
 
 ## 📥 Clone This Repository

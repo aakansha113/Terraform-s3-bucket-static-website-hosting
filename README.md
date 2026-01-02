@@ -5,7 +5,7 @@ It creates an S3 bucket, enables static website hosting, uploads `index.html` an
 
 ##  📁 Project Structure
 ```
-project
+project/
 ├── index.html # Main HTML page
 |
 ├── style.css # CSS styling for the website

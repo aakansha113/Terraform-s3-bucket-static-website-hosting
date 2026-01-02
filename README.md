@@ -3,7 +3,9 @@
 This project demonstrates how to **host a static website on AWS S3** using **Terraform**. 
 It creates an S3 bucket, enables static website hosting, uploads `index.html` and `style.css`, and outputs the public URL of the site.
 
-##  Project Structure
+##  📁 Project Structure
+```
+project
 ├── index.html # Main HTML page
 |
 ├── style.css # CSS styling for the website
@@ -15,7 +17,7 @@ It creates an S3 bucket, enables static website hosting, uploads `index.html` an
 ├── output.tf # Outputs (Website URL)
 |
 └── .gitignore # Ignore .terraform, state files
-
+```
 ## 📥 Clone This Repository
 ### To clone this portfolio on your local system, run:
 ```
